@@ -1,0 +1,92 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define MAXCOUNT 100
+
+long long int inputMassive(long long int *massive, int *massiveCount);
+long long int outputMassive(long long int *massive, int massiveCount);
+long long int searchMax(long long int *massive, int massiveCount);
+long long int searchMin(long long int *massive, int massiveCount);
+long long int reverseMassive(long long int *massive, int indexFirstMax, int indexFirstMin);
+
+int numCheck(long long int number);
+
+int main() {
+    int indexFirstMax = 0, indexFirstMin = 0;
+    int massiveCount = 0;
+    long long int massive[MAXCOUNT] = {0};
+    inputMassive(massive, &massiveCount);
+
+    indexFirstMax = searchMax(massive, massiveCount);
+    indexFirstMin = searchMin(massive, massiveCount);
+    /*printf("%lli\n", indexFirstMax);
+    printf("%lli\n", massive[indexFirstMax]);
+    
+    printf("\n");
+    
+    printf("%lli\n", indexFirstMin);
+    printf("%lli\n", massive[indexFirstMin]);*/
+    reverseMassive(massive, indexFirstMax, indexFirstMin);
+    outputMassive(massive, massiveCount);
+
+    return 0;
+}
+
+int numCheck(long long int number) {
+    if (number < -1) {
+        printf("n/a");
+        exit(0);
+    }
+    return 0;
+}
+
+long long int inputMassive(long long int *massive, int *massiveCount) {
+    long long int num = 0;
+    for (int i = 0; num != -1; i++) {
+        if (!scanf("%lli", &massive[i])) {
+            printf("n/a");
+            exit(0);
+        }
+        num = massive[i];
+        numCheck(massive[i]);
+        *massiveCount = i;
+    }
+    return 0;
+}
+
+long long int outputMassive(long long int *massive, int massiveCount) {
+    for (int i = 0; i < massiveCount; i++) {
+        printf("%lli", massive[i]);
+        if (i < massiveCount - 1) {
+            printf(" ");
+        }
+    }
+}
+
+long long int searchMax(long long int *massive, int massiveCount) {
+    long long int result = 0, checkMax = *massive;
+    for (int i = 0; i < massiveCount; i++) {
+        if (checkMax < massive[i + 1]) {
+            checkMax = massive[i + 1];
+            result = i + 1;
+        }
+    }
+    return result;
+}
+
+long long int searchMin(long long int *massive, int massiveCount) {
+    long long int result = 0, checkMin = *massive;;
+    for (int i = 0; i < massiveCount; i++) {
+        if (checkMin > massive[i]) {
+            checkMin = massive[i];
+            result = i;
+        }
+    }
+    return result;
+}
+
+long long int reverseMassive(long long int *massive, int indexFirstMax, int indexFirstMin) {
+    long long int tmp = 0;
+    tmp = massive[indexFirstMax];
+    massive[indexFirstMax] = massive[indexFirstMin];
+    massive[indexFirstMin] = tmp;
+}

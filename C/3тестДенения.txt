@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+#define GALEON 17
+#define SICKLE 29
+
+int main(){
+    int galeon1, sickle1, knat1;
+    int galeon2, sickle2, knat2;
+    int galeon, sickle, knat;
+    
+    scanf("%d%d%d", &galeon1, &sickle1, &knat1); //принимаем два счета с 3 значениями(валюта, разменная монета и
+    scanf("%d%d%d", &galeon2, &sickle2, &knat2); //разменная монета для разменной монеты) и обединяем их в один счет
+    
+    int sumKnat1, sumKnat2, sumKnat;
+    
+    sumKnat1 = (galeon1 * GALEON + sickle1) * SICKLE + knat1;
+    sumKnat2 = (galeon2 * GALEON + sickle2) * SICKLE + knat2;
+
+    sumKnat = sumKnat1 + sumKnat2;
+    
+    sickle = sumKnat / SICKLE;
+    knat = sumKnat % SICKLE;
+    galeon = sickle / GALEON;
+    sickle = sickle % GALEON;
+    
+    printf("%d %d %d", galeon, sickle, knat);
+    
+    return 0;
+}

@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+void rotateC(int *x1, int *y1, int *x2, int *y2);
+
+int main() {
+  int x1 = 0, x2 = 0, y1 = 0, y2 = 0, xc = 0, yc = 0;
+
+  scanf("%d%d%d%d", &x1, &y1, &x2, &y2); //получаем координаты левого верхнего и правого нижнего углов
+
+  rotateC(&x1, &y1, &x2, &y2);
+
+  printf("%d %d %d %d", x1, y1, x2, y2);
+
+  return 0;
+}
+
+void rotateC(int *x1, int *y1, int *x2, int *y2) {
+  int ax, bx, d;
+
+  ax = (*x2 - *x1) / 2; // вычисляем стороны
+  bx = (*y1 - *y2) / 2;
+
+  d = ax - bx; // вычисляем на сколько отчливаются стороны
+
+  *x1 = *x1 + d; //'поворачиваем'
+  *x2 = *x2 - d;
+
+  *y1 = *y1 + d;
+  *y2 = *y2 - d;
+}
